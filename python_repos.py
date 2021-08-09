@@ -14,9 +14,11 @@ print(f"Total respositories: {response_dict['total_count']}")
 repository_dictionaries = response_dict['items']
 print(f'Repositories returned: {len(repository_dictionaries)}')
 
-# Examine the first repository
-first_repository_dictionary = repository_dictionaries[0]
-print(f"\nKeys: {len(first_repository_dictionary)}")
-for key in sorted(first_repository_dictionary.keys()):
-    print(key)
+print("\nSelected information about each repository:")
+for repository_dictionary in repository_dictionaries:
+    print(f"\nName: {repository_dictionary['name']}")
+    print(f"Owner: {repository_dictionary['owner']['login']}")
+    print(f"Stars: {repository_dictionary['stargazers_count']}")
+    print(f"Repository: {repository_dictionary['html_url']}")
+    print(f"Description: {repository_dictionary['description']}")
 
