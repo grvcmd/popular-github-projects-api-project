@@ -12,9 +12,13 @@ print(f"Status code: {r.status_code}")
 # Process results.
 response_dictionary = r.json()
 repository_dictionaries = response_dictionary['items']
-repository_names, stars, labels = [], [], []
+repository_links, stars, labels = [], [], []
 for repository_dictionary in repository_dictionaries:
-    repository_names.append(repository_dictionary['name'])
+    repository_name = repository_dictionary['name']
+    repository_url = repository_dictionary['html_url']
+    repository_link = f"<a href='{repository_url}'>{repository_name}</a>"
+    repository_links.append(repository_link)
+
     stars.append(repository_dictionary['stargazers_count'])
 
     owner = repository_dictionary['owner']['login']
@@ -25,7 +29,7 @@ for repository_dictionary in repository_dictionaries:
 # Make visualization.
 data = [{
     'type': 'bar',
-    'x': repository_names,
+    'x': repository_links,
     'y': stars,
     'hovertext': labels,
     'marker': {
